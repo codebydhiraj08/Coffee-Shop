@@ -4,6 +4,7 @@
   "description": "A modern, responsive website for Brewed Bliss Café in Pune, featuring a beautiful design with coffee-themed aesthetics.",
   "main": "script.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
