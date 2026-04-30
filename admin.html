@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Brewed Bliss</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --espresso: #1a0f08;
+        --mocha: #2c1a0e;
+        --amber: #d4863a;
+        --gold: #e8a855;
+        --cream: #f5ecd7;
+        --text-muted: rgba(245, 236, 215, 0.6);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--espresso);
+        color: var(--cream);
+        font-family: "DM Sans", sans-serif;
+        min-height: 100vh;
+      }
+
+      /* ── LUXURY HERO SECTION ── */
+      .admin-hero {
+        position: relative;
+        padding: 80px 60px 60px;
+        background: radial-gradient(
+          circle at 50% 0%,
+          var(--mocha) 0%,
+          var(--espresso) 100%
+        );
+        border-bottom: 1px solid rgba(212, 134, 58, 0.2);
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .hero-blob {
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: var(--gold);
+        filter: blur(120px);
+        opacity: 0.1;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      .admin-nav {
+        position: absolute;
+        top: 30px;
+        left: 60px;
+        right: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .brand {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      .back-btn {
+        color: var(--amber);
+        text-decoration: none;
+        border: 1px solid var(--amber);
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .back-btn:hover {
+        background: var(--amber);
+        color: #000;
+        box-shadow: 0 5px 15px rgba(212, 134, 58, 0.4);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        margin-top: 40px;
+      }
+
+      .hero-eyebrow {
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--amber);
+        margin-bottom: 16px;
+        display: block;
+      }
+
+      .hero-title {
+        font-family: "Playfair Display", serif;
+        font-size: 56px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 20px;
+      }
+
+      .hero-title em {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        color: var(--text-muted);
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      /* ── DATA PANEL ── */
+      .panel-container {
+        max-width: 1200px;
+        margin: -30px auto 60px;
+        padding: 0 20px;
+        position: relative;
+        z-index: 5;
+      }
+
+      .table-wrap {
+        background: rgba(44, 26, 14, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+
+      th,
+      td {
+        padding: 20px 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      th {
+        background: rgba(0, 0, 0, 0.2);
+        color: var(--gold);
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+      }
+
+      td {
+        font-size: 15px;
+        color: #ddd;
+        vertical-align: middle;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .status-Pending {
+        background: rgba(255, 193, 7, 0.15);
+        color: #ffc107;
+        border: 1px solid rgba(255, 193, 7, 0.3);
+      }
+      .status-Confirmed {
+        background: rgba(76, 175, 80, 0.15);
+        color: #4caf50;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+      }
+      .status-Cancelled {
+        background: rgba(244, 67, 54, 0.15);
+        color: #f44336;
+        border: 1px solid rgba(244, 67, 54, 0.3);
+      }
+
+      .btn-action {
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--cream);
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 13px;
+        margin-right: 8px;
+        font-weight: 500;
+      }
+      .btn-action.confirm:hover {
+        background: #4caf50;
+        border-color: #4caf50;
+        color: #fff;
+      }
+      .btn-action.cancel:hover {
+        background: #f44336;
+        border-color: #f44336;
+        color: #fff;
+      }
+
+      .empty-state {
+        padding: 80px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="admin-hero">
+      <div class="hero-blob"></div>
+      <div class="admin-nav">
+        <div class="brand">Brewed Bliss</div>
+        <a href="/" class="back-btn">← View Live Site</a>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-eyebrow">Management Portal</span>
+        <h1 class="hero-title">Reservation <em>Command Center</em></h1>
+        <p class="hero-subtitle">
+          Manage all incoming guest bookings, review special requests, and
+          control your cafe's seating flow in real-time.
+        </p>
+      </div>
+    </section>
+
+    <div class="panel-container">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Customer</th>
+              <th>Contact</th>
+              <th>Guests</th>
+              <th>Requests</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr>
+              <td colspan="7" class="empty-state">
+                Securely loading reservations...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function loadReservations() {
+        try {
+          // Get reservations from localStorage
+          const reservations =
+            JSON.parse(localStorage.getItem("reservations")) || [];
+          const tbody = document.getElementById("table-body");
+
+          if (reservations.length === 0) {
+            tbody.innerHTML =
+              '<tr><td colspan="7" class="empty-state">No reservations found yet.</td></tr>';
+            return;
+          }
+
+          // Sort by date and time (newest first)
+          reservations.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at),
+          );
+
+          tbody.innerHTML = "";
+          reservations.forEach((row) => {
+            const statusClass = `status-${row.status}`;
+            const requests =
+              row.special_requests || "<i style='opacity:0.3'>None</i>";
+
+            let formattedTime = row.reservation_time;
+            try {
+              const parts = formattedTime.split(":");
+              let hours = parseInt(parts[0], 10);
+              const ampm = hours >= 12 ? "PM" : "AM";
+              hours = hours % 12 || 12;
+              formattedTime = `${hours}:${parts[1]} ${ampm}`;
+            } catch (e) {}
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                        <td><strong style="color:#fff">${row.reservation_date}</strong><br><small style="color:var(--amber)">⌚ ${formattedTime}</small></td>
+                        <td style="font-weight: 500; color: #fff;">${row.customer_name}</td>
+                        <td>${row.phone_number}</td>
+                        <td>${row.guest_count}</td>
+                        <td style="max-width: 200px; line-height: 1.4;">${requests}</td>
+                        <td><span class="status-badge ${statusClass}">${row.status}</span></td>
+                        <td>
+                            ${row.status === "Pending" ? `<button class="btn-action confirm" onclick="updateStatus(${row.id}, 'Confirmed')">Confirm</button>` : ""}
+                            ${row.status === "Pending" || row.status === "Confirmed" ? `<button class="btn-action cancel" onclick="updateStatus(${row.id}, 'Cancelled')">Cancel</button>` : ""}
+                        </td>
+                    `;
+            tbody.appendChild(tr);
+          });
+        } catch (e) {
+          console.error(e);
+          document.getElementById("table-body").innerHTML =
+            '<tr><td colspan="7" class="empty-state" style="color:#f44336">Error loading reservations.</td></tr>';
+        }
+      }
+
+      function updateStatus(id, newStatus) {
+        try {
+          // Get reservations from localStorage
+          let reservations =
+            JSON.parse(localStorage.getItem("reservations")) || [];
+
+          // Find and update the reservation
+          const reservation = reservations.find((r) => r.id === id);
+          if (reservation) {
+            reservation.status = newStatus;
+            localStorage.setItem("reservations", JSON.stringify(reservations));
+            loadReservations();
+          } else {
+            alert("Reservation not found");
+          }
+        } catch (e) {
+          console.error(e);
+          alert("Error updating status");
+        }
+      }
+
+      // initial load
+      loadReservations();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brewed Bliss Café – Pune</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="logo-wrap">
+        <img class="logo-icon" src="logo.jpg" alt="Brewed Bliss Logo" />
+        <div class="logo-text">
+          <span class="logo-name">Brewed Bliss</span>
+          <span class="logo-sub">Cafe Pune</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="admin.html" class="nav-cta">Admin Dashboard</a>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+      <video
+        class="hero-video video-1"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+        loop
+      >
+        <source src="coffee-video.mp4" type="video/mp4" />
+      </video>
+      <video
+        class="hero-video video-2"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
+        loop
+        style="opacity: 0"
+      >
+        <source src="coffee-video.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-bg-blob blob-1"></div>
+      <div class="hero-bg-blob blob-2"></div>
+      <div class="hero-bg-blob blob-3"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge"><span></span> Now Open in Pune</div>
+        <h1 class="hero-title">Brewed<br /><em>Bliss</em><br />Café</h1>
+        <p class="hero-tagline">Where Every Sip<br />Tells a Story.</p>
+        <div class="hero-buttons">
+          <a href="#menu" class="btn-primary">☕ View Menu</a>
+          <a href="#contact" class="btn-secondary">Reserve a Table →</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">50+</span
+            ><span class="stat-label">Coffee Blends</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">8K+</span
+            ><span class="stat-label">Happy Guests</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">4.9★</span
+            ><span class="stat-label">Rated in Pune</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <div class="fcard-title">TODAY'S SPECIAL</div>
+          <div class="fcard-val">Caramel Latte</div>
+          <div class="fcard-sub">₹199 · Limited Offer</div>
+        </div>
+        <div class="floating-card card-2">
+          <div class="fcard-title">FRESHLY BREWED</div>
+          <div class="fcard-val">7 AM – 11 PM</div>
+          <div class="fcard-sub">Daily · Koregaon Park</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <div class="categories reveal">
+      <div class="cat-chip active" data-category="espresso">
+        <span>☕</span> Espresso
+      </div>
+      <div class="cat-chip" data-category="cold-brews">
+        <span>🧋</span> Cold Brews
+      </div>
+      <div class="cat-chip" data-category="teas"><span>🍵</span> Teas</div>
+      <div class="cat-chip" data-category="pastries">
+        <span>🥐</span> Pastries
+      </div>
+      <div class="cat-chip" data-category="desserts">
+        <span>🍰</span> Desserts
+      </div>
+      <div class="cat-chip" data-category="light-bites">
+        <span>🥗</span> Light Bites
+      </div>
+    </div>
+
+    <!-- MENU -->
+    <section id="menu">
+      <div class="section-heading reveal">
+        <span class="section-eyebrow">Our Offerings</span>
+        <h2 class="section-title">Crafted with <em>Passion</em></h2>
+        <p class="section-sub">Every cup brewed to perfection — for you.</p>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card reveal" data-category="espresso">
+          <div class="menu-card-img">
+            <img src="classic cappuccino.jpg" alt="Classic Cappuccino" />
+          </div>
+          <span class="tag-popular">⭐ Popular</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Espresso Based</div>
+            <div class="menu-card-name">Classic Cappuccino</div>
+            <div class="menu-card-desc">
+              Rich espresso with velvety steamed milk foam. A timeless Italian
+              classic.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>189</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-category="cold-brews">
+          <div class="menu-card-img">
+            <img
+              src="salted caramel cold brew.jpg"
+              alt="Salted Caramel Cold Brew"
+            />
+          </div>
+          <span class="tag-new">New</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Cold Brew</div>
+            <div class="menu-card-name">Salted Caramel Cold Brew</div>
+            <div class="menu-card-desc">
+              18-hour steeped cold brew with a hint of salted caramel.
+              Refreshingly bold.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>229</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-category="teas">
+          <div class="menu-card-img">
+            <img src="matcha latte.jpg" alt="Matcha Latte" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Specialty</div>
+            <div class="menu-card-name">Matcha Latte</div>
+            <div class="menu-card-desc">
+              Ceremonial grade matcha whisked with oat milk. Earthy, creamy, and
+              calming.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>249</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-category="pastries">
+          <div class="menu-card-img">
+            <img src="butter croissant.jpg" alt="Butter Croissant" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Bakery</div>
+            <div class="menu-card-name">Butter Croissant</div>
+            <div class="menu-card-desc">
+              Freshly baked every morning. Golden, flaky, and irresistibly warm.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>120</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-category="espresso">
+          <div class="menu-card-img">
+            <img src="dark mocha delight.jpg" alt="Dark Mocha Delight" />
+          </div>
+          <span class="tag-popular">⭐ Popular</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Hot Chocolate</div>
+            <div class="menu-card-name">Dark Mocha Delight</div>
+            <div class="menu-card-desc">
+              Intense dark chocolate with double espresso. For the true
+              chocolate lover.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>219</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-card reveal" data-category="desserts">
+          <div class="menu-card-img">
+            <img src="tiramisu cheesecake.jpg" alt="Tiramisu Cheesecake" />
+          </div>
+          <span class="tag-new">New</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Desserts</div>
+            <div class="menu-card-name">Tiramisu Cheesecake</div>
+            <div class="menu-card-desc">
+              A Pune-exclusive fusion of Italian Tiramisu and New York
+              cheesecake.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>280</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7: Chocolate Cheesecake -->
+        <div class="menu-card reveal" data-category="desserts">
+          <div class="menu-card-img">
+            <img src="chocolate cheesecake.jpg" alt="Chocolate Cheesecake" />
+          </div>
+          <span class="tag-popular">⭐ Popular</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Desserts</div>
+            <div class="menu-card-name">Chocolate Cheesecake</div>
+            <div class="menu-card-desc">
+              Rich and creamy chocolate cheesecake with a buttery biscuit base.
+              A chocolate lover's dream dessert.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>260</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 8: Chocolate Shake -->
+        <div class="menu-card reveal" data-category="light-bites">
+          <div class="menu-card-img">
+            <img src="chocolate shake.jpg" alt="Chocolate Shake" />
+          </div>
+          <span class="tag-new">New</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Shakes</div>
+            <div class="menu-card-name">Chocolate Shake</div>
+            <div class="menu-card-desc">
+              Thick and indulgent chocolate milkshake made with premium Belgian
+              chocolate and creamy milk.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>199</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 9: Coco Delight -->
+        <div class="menu-card reveal" data-category="desserts">
+          <div class="menu-card-img">
+            <img src="coco delight.jpg" alt="Coco Delight" />
+          </div>
+          <span class="tag-popular">⭐ Popular</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Ice Cream</div>
+            <div class="menu-card-name">Coco Delight</div>
+            <div class="menu-card-desc">
+              Velvety chocolate ice cream swirled with cocoa chunks and drizzled
+              with rich chocolate sauce. Pure bliss in every scoop.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>179</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 10: Cold Coffee -->
+        <div class="menu-card reveal" data-category="cold-brews">
+          <div class="menu-card-img">
+            <img src="cold coffee.jpg" alt="Cold Coffee" />
+          </div>
+          <span class="tag-new">New</span>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Shakes</div>
+            <div class="menu-card-name">Cold Coffee</div>
+            <div class="menu-card-desc">
+              Chilled creamy cold coffee blended with fresh milk and a hint of
+              vanilla. The perfect refresher for any time of day.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>169</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 11: Cup Cake -->
+        <div class="menu-card reveal" data-category="desserts">
+          <div class="menu-card-img">
+            <img src="cup cake.jpg" alt="Cup Cake" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Desserts</div>
+            <div class="menu-card-name">Classic Cup Cake</div>
+            <div class="menu-card-desc">
+              Soft and fluffy cupcake topped with creamy frosting. Freshly baked
+              daily — a sweet treat for every mood.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>99</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 12: Cup Cake -->
+        <div class="menu-card reveal" data-category="light-bites">
+          <div class="menu-card-img">
+            <img src="oreo shake.jpg" alt="Oreo Shake" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Shakes</div>
+            <div class="menu-card-name">Oreo Shake</div>
+            <div class="menu-card-desc">
+              Thick and frosty Oreo milkshake made with real Oreo crumbles,
+              fresh milk, and a swirl of chocolate. Every sip is a crunchy
+              delight.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>220</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 13: Cup Cake -->
+        <div class="menu-card reveal" data-category="light-bites">
+          <div class="menu-card-img">
+            <img src="kitkat shake.jpg" alt="Kitkat Shake" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-category">Shakes</div>
+            <div class="menu-card-name">Kitkat Shake</div>
+            <div class="menu-card-desc">
+              Chilled creamy shake packed with real KitKat pieces and topped
+              with chocolate drizzle. A crispy, chocolaty treat in every sip.
+            </div>
+            <div class="menu-card-footer">
+              <div class="menu-card-price"><sup>₹</sup>190</div>
+              <button class="btn-add">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-visual reveal">
+        <div class="about-big-circle">
+          <img src="oreo shake1.png" alt="Oreo Shake" class="about-shake-img" />
+        </div>
+        <div class="about-badge-float">
+          <div class="big-num">5+</div>
+          <div class="small-txt">Years of Bliss</div>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="section-heading">
+          <span class="section-eyebrow">Our Story</span>
+          <h2 class="section-title">
+            Pune's <em>Favourite</em><br />Coffee Corner
+          </h2>
+        </div>
+        <p class="about-body">
+          Born from a deep love for coffee,
+          <strong>Brewed Bliss Café</strong> started as a small corner in
+          Koregaon Park and grew into Pune's most beloved café. We source
+          single-origin beans from the finest estates of Coorg and Chikmagalur,
+          and every cup is brewed by our trained baristas with love and
+          precision.
+        </p>
+        <div class="about-features">
+          <div class="about-feat">
+            <div class="feat-icon">🌱</div>
+            <div>
+              <div class="feat-text">Farm-to-Cup Philosophy</div>
+              <div class="feat-sub">Sourced directly from Indian estates</div>
+            </div>
+          </div>
+          <div class="about-feat">
+            <div class="feat-icon">🏆</div>
+            <div>
+              <div class="feat-text">Award-Winning Baristas</div>
+              <div class="feat-sub">Trained in Italian & specialty brewing</div>
+            </div>
+          </div>
+          <div class="about-feat">
+            <div class="feat-icon">✨</div>
+            <div>
+              <div class="feat-text">Cozy Ambience</div>
+              <div class="feat-sub">Perfect for work, dates & meet-ups</div>
+            </div>
+          </div>
+        </div>
+        <a
+          href="#contact"
+          class="btn-primary"
+          style="display: inline-block; text-decoration: none"
+          >Visit Us Today →</a
+        >
+      </div>
+    </section>
+
+    <!-- SPECIALS BANNER -->
+    <section id="specials">
+      <div class="specials-inner">
+        <div class="specials-text">
+          <div class="section-heading">
+            <span class="section-eyebrow">This Week's Picks</span>
+            <h2
+              class="section-title"
+              style="text-align: left; color: var(--cream)"
+            >
+              Chef's <em style="color: var(--gold)">Special</em><br />Combos
+            </h2>
+          </div>
+          <p class="specials-body">
+            Handpicked by our head barista — exclusive combinations curated
+            fresh every week. Only at Brewed Bliss, only in Pune.
+          </p>
+          <a
+            href="#menu"
+            class="btn-primary"
+            style="
+              display: inline-block;
+              margin-top: 28px;
+              background: var(--amber);
+              text-decoration: none;
+            "
+            >Explore Full Menu →</a
+          >
+        </div>
+        <div class="specials-visual">
+          <div class="special-card">
+            <img src="hazelnut latte & croissant.jpg" alt="Hazelnut Latte" />
+            <div class="card-name">Hazelnut Latte + Croissant</div>
+            <div class="card-price">₹299</div>
+            <span class="card-badge">SAVE 20%</span>
+          </div>
+
+          <div class="special-card">
+            <img src="cold brew & cheesecake slice.jpg" alt="Cold Brew" />
+            <div class="card-name">Cold Brew + Cheesecake Slice</div>
+            <div class="card-price">₹449</div>
+            <span class="card-badge">BEST VALUE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="section-heading reveal">
+        <span class="section-eyebrow">What Our Guests Say</span>
+        <h2 class="section-title">Loved by <em>Pune</em></h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            Hands down the best coffee in Pune! The Salted Caramel Cold Brew is
+            absolutely divine. The ambience is perfect for both work and
+            relaxing evenings.
+          </p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">👩</div>
+            <div>
+              <div class="reviewer-name">Priya Sharma</div>
+              <div class="reviewer-tag">Koregaon Park Regular</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            I come here every morning before work. The Cappuccino is
+            consistently perfect, and the staff remembers my order. That
+            personal touch makes all the difference!
+          </p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">👨</div>
+            <div>
+              <div class="reviewer-name">Rahul Joshi</div>
+              <div class="reviewer-tag">Coffee Connoisseur, Pune</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            The Tiramisu Cheesecake deserves its own award. Brewed Bliss has
+            become our go-to spot for dates and family brunches. Absolutely love
+            this place!
+          </p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">👩</div>
+            <div>
+              <div class="reviewer-name">Ananya Kulkarni</div>
+              <div class="reviewer-tag">Food Blogger, Pune</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-info reveal">
+        <div class="section-heading">
+          <span class="section-eyebrow">Find Us</span>
+          <h2 class="section-title">Come Say <em>Hello</em></h2>
+          <p class="section-sub">We'd love to brew your perfect cup.</p>
+        </div>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">
+              Koregaon Park, Pune — 411001
+              <span>Near Phoenix Market City</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div class="contact-text">
+              Monday – Sunday: 7:00 AM – 11:00 PM
+              <span>Open 365 days a year</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-text">
+              +91 98765 43210
+              <span>Call or WhatsApp for reservations</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-text">
+              hello@brewedbliss.in
+              <span>We reply within 2 hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal">
+        <div class="form-title">Reserve a Table ☕</div>
+        <form id="res-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input
+                type="text"
+                id="res-name"
+                placeholder="Aarav Mehta"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input
+                type="tel"
+                id="res-phone"
+                placeholder="+91 XXXXX XXXXX"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="res-date" required />
+            </div>
+            <div class="form-group">
+              <label>Time</label>
+              <input type="time" id="res-time" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Number of Guests</label>
+            <select id="res-guests">
+              <option>1 Guest</option>
+              <option>2 Guests</option>
+              <option>3-4 Guests</option>
+              <option>5-8 Guests</option>
+              <option>Large Group (9+)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Special Requests</label>
+            <textarea
+              id="res-requests"
+              placeholder="Any dietary requirements, special occasion, seating preference..."
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-reserve" id="btn-reserve">
+            Confirm Reservation →
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo-wrap" style="text-decoration: none">
+            <img class="logo-icon" src="logo.jpg" alt="Brewed Bliss Logo" />
+            <div class="logo-text">
+              <span class="logo-name">Brewed Bliss</span>
+              <span class="logo-sub">Cafe Pune</span>
+            </div>
+          </a>
+          <p class="footer-tagline">
+            Where Every Sip Tells a Story.<br />Crafting moments, one cup at a
+            time since 2019.
+          </p>
+          <div class="footer-socials">
+            <div class="social-btn">📸</div>
+            <div class="social-btn">💬</div>
+            <div class="social-btn">👍</div>
+            <div class="social-btn">🐦</div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Menu</div>
+          <div class="footer-links">
+            <a href="#">Espresso Drinks</a>
+            <a href="#">Cold Brews</a>
+            <a href="#">Specialty Teas</a>
+            <a href="#">Bakery & Pastries</a>
+            <a href="#">Desserts</a>
+            <a href="#">Light Bites</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <div class="footer-links">
+            <a href="#">Our Story</a>
+            <a href="#">Careers</a>
+            <a href="#">Press & Media</a>
+            <a href="#">Franchise</a>
+            <a href="#">Gift Cards</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Visit Us</div>
+          <div class="footer-links">
+            <a href="#">Koregaon Park, Pune</a>
+            <a href="#">Mon–Sun: 7AM–11PM</a>
+            <a href="#">+91 98765 43210</a>
+            <a href="#">hello@brewedbliss.in</a>
+            <a href="#">Google Maps →</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Brewed Bliss Café, Pune. All rights reserved.</span>
+        <span>Made with <span class="heart">♥</span> & great coffee.</span>
+      </div>
+    </footer>
+
+    <!-- SCROLL TOP -->
+    <button
+      class="scroll-top"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      ↑
+    </button>
+
+    <script src="script.js?v=2"></script>
+  </body>
+</html>
