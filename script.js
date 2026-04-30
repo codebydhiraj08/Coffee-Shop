@@ -210,3 +210,131 @@ setTimeout(() => {
     startVideoPlay();
   }
 }, 2000);
+
+// -- CART & ORDERING SYSTEM --
+let cart = [];
+const cartBtn = document.getElementById("cart-btn");
+const cartModal = document.getElementById("cart-modal");
+const closeCartBtn = document.getElementById("close-cart");
+const cartCount = document.getElementById("cart-count");
+const cartItemsContainer = document.getElementById("cart-items");
+const cartTotalPrice = document.getElementById("cart-total-price");
+const orderForm = document.getElementById("order-form");
+const btnPlaceOrder = document.getElementById("btn-place-order");
+
+// Toggle Modal
+cartBtn.addEventListener("click", () => cartModal.classList.add("active"));
+closeCartBtn.addEventListener("click", () => cartModal.classList.remove("active"));
+cartModal.addEventListener("click", (e) => {
+  if (e.target === cartModal) cartModal.classList.remove("active");
+});
+
+// Update Cart UI
+function updateCart() {
+  cartCount.textContent = cart.length;
+  
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = `<div class="empty-cart">Your cart is empty.</div>`;
+    cartTotalPrice.textContent = "0";
+    orderForm.style.display = "none";
+    return;
+  }
+
+  let total = 0;
+  cartItemsContainer.innerHTML = "";
+  cart.forEach((item, index) => {
+    total += item.price;
+    const div = document.createElement("div");
+    div.className = "cart-item";
+    div.innerHTML = `
+      <div class="cart-item-name">${item.name}</div>
+      <div class="cart-item-price">?${item.price} <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer; margin-left: 10px;">&times;</button></div>
+    `;
+    cartItemsContainer.appendChild(div);
+  });
+  
+  cartTotalPrice.textContent = total;
+  orderForm.style.display = "block";
+}
+
+window.removeFromCart = function(index) {
+  cart.splice(index, 1);
+  updateCart();
+};
+
+// Add to Cart
+document.querySelectorAll(".btn-add").forEach((btn) => {
+  // Override the existing click listener or add a new one
+  btn.addEventListener("click", function (e) {
+    // Find the closest menu card
+    const card = this.closest(".menu-card");
+    if (!card) return;
+    
+    const name = card.querySelector(".menu-card-name").textContent.trim();
+    let priceText = card.querySelector(".menu-card-price").textContent.replace("?", "").trim();
+    const price = parseInt(priceText, 10);
+    
+    cart.push({ name, price });
+    updateCart();
+    
+    // Animation
+    const orig = this.textContent;
+    this.textContent = "?";
+    this.style.background = "#4CAF50";
+    setTimeout(() => {
+      this.textContent = "+";
+      this.style.background = "";
+    }, 1200);
+  });
+});
+
+// Place Order
+orderForm.addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const name = document.getElementById("order-name").value.trim();
+  const table = document.getElementById("order-table").value.trim();
+  
+  if (!name || !table || cart.length === 0) return;
+  
+  btnPlaceOrder.textContent = "Placing Order...";
+  btnPlaceOrder.disabled = true;
+  
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  
+  try {
+    const response = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        customer_name: name,
+        table_number: table,
+        items: cart,
+        total_amount: total
+      })
+    });
+    
+    if (!response.ok) throw new Error("Failed to place order");
+    
+    // Success
+    btnPlaceOrder.style.background = "#4CAF50";
+    btnPlaceOrder.textContent = "? Order Placed!";
+    
+    setTimeout(() => {
+      cart = [];
+      updateCart();
+      cartModal.classList.remove("active");
+      btnPlaceOrder.style.background = "";
+      btnPlaceOrder.textContent = "Place Order ?";
+      btnPlaceOrder.disabled = false;
+      document.getElementById("order-name").value = "";
+      document.getElementById("order-table").value = "";
+    }, 2000);
+    
+  } catch (err) {
+    console.error(err);
+    alert("Error placing order. Please try again.");
+    btnPlaceOrder.textContent = "Place Order ?";
+    btnPlaceOrder.disabled = false;
+  }
+});
+

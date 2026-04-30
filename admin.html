@@ -206,6 +206,21 @@
         color: #f44336;
         border: 1px solid rgba(244, 67, 54, 0.3);
       }
+      .status-Preparing {
+        background: rgba(33, 150, 243, 0.15);
+        color: #2196F3;
+        border: 1px solid rgba(33, 150, 243, 0.3);
+      }
+      .status-Ready {
+        background: rgba(255, 152, 0, 0.15);
+        color: #FF9800;
+        border: 1px solid rgba(255, 152, 0, 0.3);
+      }
+      .status-Served {
+        background: rgba(76, 175, 80, 0.15);
+        color: #4caf50;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+      }
 
       .btn-action {
         background: none;
@@ -257,6 +272,31 @@
     </section>
 
     <div class="panel-container">
+      <h2 style="margin-bottom: 20px; font-family: 'Playfair Display', serif;">Live Orders 🛒</h2>
+      <div class="table-wrap" style="margin-bottom: 50px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Customer</th>
+              <th>Table No.</th>
+              <th>Items</th>
+              <th>Total (₹)</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="orders-body">
+            <tr>
+              <td colspan="7" class="empty-state">
+                Loading live orders...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="margin-bottom: 20px; font-family: 'Playfair Display', serif;">Table Reservations 📅</h2>
       <div class="table-wrap">
         <table>
           <thead>
@@ -282,29 +322,22 @@
     </div>
 
     <script>
+      // ── RESERVATIONS ──
       function loadReservations() {
         try {
-          // Get reservations from localStorage
-          const reservations =
-            JSON.parse(localStorage.getItem("reservations")) || [];
+          const reservations = JSON.parse(localStorage.getItem("reservations")) || [];
           const tbody = document.getElementById("table-body");
 
           if (reservations.length === 0) {
-            tbody.innerHTML =
-              '<tr><td colspan="7" class="empty-state">No reservations found yet.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No reservations found yet.</td></tr>';
             return;
           }
 
-          // Sort by date and time (newest first)
-          reservations.sort(
-            (a, b) => new Date(b.created_at) - new Date(a.created_at),
-          );
-
+          reservations.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
           tbody.innerHTML = "";
           reservations.forEach((row) => {
             const statusClass = `status-${row.status}`;
-            const requests =
-              row.special_requests || "<i style='opacity:0.3'>None</i>";
+            const requests = row.special_requests || "<i style='opacity:0.3'>None</i>";
 
             let formattedTime = row.reservation_time;
             try {
@@ -317,33 +350,28 @@
 
             const tr = document.createElement("tr");
             tr.innerHTML = `
-                        <td><strong style="color:#fff">${row.reservation_date}</strong><br><small style="color:var(--amber)">⌚ ${formattedTime}</small></td>
-                        <td style="font-weight: 500; color: #fff;">${row.customer_name}</td>
-                        <td>${row.phone_number}</td>
-                        <td>${row.guest_count}</td>
-                        <td style="max-width: 200px; line-height: 1.4;">${requests}</td>
-                        <td><span class="status-badge ${statusClass}">${row.status}</span></td>
-                        <td>
-                            ${row.status === "Pending" ? `<button class="btn-action confirm" onclick="updateStatus(${row.id}, 'Confirmed')">Confirm</button>` : ""}
-                            ${row.status === "Pending" || row.status === "Confirmed" ? `<button class="btn-action cancel" onclick="updateStatus(${row.id}, 'Cancelled')">Cancel</button>` : ""}
-                        </td>
-                    `;
+              <td><strong style="color:#fff">${row.reservation_date}</strong><br><small style="color:var(--amber)">⌚ ${formattedTime}</small></td>
+              <td style="font-weight: 500; color: #fff;">${row.customer_name}</td>
+              <td>${row.phone_number}</td>
+              <td>${row.guest_count}</td>
+              <td style="max-width: 200px; line-height: 1.4;">${requests}</td>
+              <td><span class="status-badge ${statusClass}">${row.status}</span></td>
+              <td>
+                ${row.status === "Pending" ? `<button class="btn-action confirm" onclick="updateStatus(${row.id}, 'Confirmed')">Confirm</button>` : ""}
+                ${row.status === "Pending" || row.status === "Confirmed" ? `<button class="btn-action cancel" onclick="updateStatus(${row.id}, 'Cancelled')">Cancel</button>` : ""}
+              </td>
+            `;
             tbody.appendChild(tr);
           });
         } catch (e) {
           console.error(e);
-          document.getElementById("table-body").innerHTML =
-            '<tr><td colspan="7" class="empty-state" style="color:#f44336">Error loading reservations.</td></tr>';
+          document.getElementById("table-body").innerHTML = '<tr><td colspan="7" class="empty-state" style="color:#f44336">Error loading reservations.</td></tr>';
         }
       }
 
       function updateStatus(id, newStatus) {
         try {
-          // Get reservations from localStorage
-          let reservations =
-            JSON.parse(localStorage.getItem("reservations")) || [];
-
-          // Find and update the reservation
+          let reservations = JSON.parse(localStorage.getItem("reservations")) || [];
           const reservation = reservations.find((r) => r.id === id);
           if (reservation) {
             reservation.status = newStatus;
@@ -358,8 +386,70 @@
         }
       }
 
-      // initial load
+      // ── LIVE ORDERS (API POLLING) ──
+      async function loadOrders() {
+        try {
+          const res = await fetch("/api/orders");
+          const json = await res.json();
+          const orders = json.data || [];
+          const tbody = document.getElementById("orders-body");
+
+          if (orders.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No live orders.</td></tr>';
+            return;
+          }
+
+          tbody.innerHTML = "";
+          orders.forEach((row) => {
+            const statusClass = `status-${row.status.replace(" ", "")}`;
+            let itemsText = "";
+            try {
+              const itemsArr = JSON.parse(row.items);
+              itemsText = itemsArr.map(i => `${i.name} (₹${i.price})`).join("<br>");
+            } catch(e) { itemsText = row.items; }
+
+            const time = new Date(row.created_at).toLocaleTimeString();
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td><small style="color:var(--amber)">⌚ ${time}</small></td>
+              <td style="font-weight: 500; color: #fff;">${row.customer_name}</td>
+              <td style="font-weight: 700; color: var(--gold);">${row.table_number}</td>
+              <td style="line-height: 1.4;">${itemsText}</td>
+              <td><strong>₹${row.total_amount}</strong></td>
+              <td><span class="status-badge ${statusClass}">${row.status}</span></td>
+              <td>
+                ${row.status === "Preparing" ? `<button class="btn-action confirm" style="background: rgba(33, 150, 243, 0.2); border-color: #2196F3;" onclick="updateOrderStatus(${row.id}, 'Ready')">Mark Ready</button>` : ""}
+                ${row.status === "Ready" ? `<button class="btn-action confirm" onclick="updateOrderStatus(${row.id}, 'Served')">Mark Served</button>` : ""}
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        } catch (e) {
+          console.error("Failed to load orders:", e);
+        }
+      }
+
+      async function updateOrderStatus(id, newStatus) {
+        try {
+          await fetch(`/api/orders/${id}/status`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: newStatus })
+          });
+          loadOrders();
+        } catch (e) {
+          console.error(e);
+          alert("Error updating order status");
+        }
+      }
+
+      // Initial loads
       loadReservations();
+      loadOrders();
+
+      // Poll orders every 5 seconds
+      setInterval(loadOrders, 5000);
     </script>
   </body>
 </html>

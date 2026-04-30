@@ -40,9 +40,29 @@ const db = new sqlite3.Database(
         )`,
         (err) => {
           if (err) {
-            console.error("Error creating table:", err);
+            console.error("Error creating reservations table:", err);
           } else {
             console.log("✓ Reservations table ready");
+          }
+        },
+      );
+
+      // Ensure orders table exists
+      db.run(
+        `CREATE TABLE IF NOT EXISTS orders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_name TEXT NOT NULL,
+            table_number TEXT NOT NULL,
+            items TEXT NOT NULL,
+            total_amount INTEGER NOT NULL,
+            status TEXT DEFAULT 'Preparing',
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )`,
+        (err) => {
+          if (err) {
+            console.error("Error creating orders table:", err);
+          } else {
+            console.log("✓ Orders table ready");
           }
         },
       );
@@ -124,6 +144,80 @@ app.patch("/api/reservations/:id/status", (req, res) => {
         return res.status(404).json({ error: "Reservation not found" });
       }
       res.json({ message: "Status updated successfully" });
+    });
+  } catch (err) {
+    console.error("Server error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Create a new order
+app.post("/api/orders", (req, res) => {
+  try {
+    const { customer_name, table_number, items, total_amount } = req.body;
+
+    if (!customer_name || !table_number || !items) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const sql = `INSERT INTO orders (customer_name, table_number, items, total_amount) VALUES (?, ?, ?, ?)`;
+    const params = [customer_name, table_number, JSON.stringify(items), total_amount || 0];
+
+    db.run(sql, params, function (err) {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).json({ error: "Failed to create order" });
+      }
+      res.status(201).json({
+        message: "Order placed successfully",
+        id: this.lastID,
+      });
+    });
+  } catch (err) {
+    console.error("Server error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Fetch all orders
+app.get("/api/orders", (req, res) => {
+  try {
+    const sql = `SELECT * FROM orders ORDER BY created_at DESC`;
+    db.all(sql, [], (err, rows) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).json({ error: "Failed to load orders" });
+      }
+      res.json({
+        data: rows || [],
+      });
+    });
+  } catch (err) {
+    console.error("Server error:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Update order status
+app.patch("/api/orders/:id/status", (req, res) => {
+  try {
+    const id = req.params.id;
+    const { status } = req.body;
+
+    if (!status) {
+      return res.status(400).json({ error: "Status is required" });
+    }
+
+    const sql = `UPDATE orders SET status = ? WHERE id = ?`;
+    db.run(sql, [status, id], function (err) {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).json({ error: "Failed to update order status" });
+      }
+      if (this.changes === 0) {
+        return res.status(404).json({ error: "Order not found" });
+      }
+      res.json({ message: "Order status updated successfully" });
     });
   } catch (err) {
     console.error("Server error:", err);
