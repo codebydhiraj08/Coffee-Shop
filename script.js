@@ -153,64 +153,6 @@ document.getElementById("res-form").addEventListener("submit", function (e) {
   }, 3500);
 });
 
-// ── SMOOTH VIDEO LOOP (Crossfade) ──
-const video1 = document.querySelector(".video-1");
-const video2 = document.querySelector(".video-2");
-let activeVideo = video1;
-let nextVideo = video2;
-let isLooping = false;
-
-// Video 2 ko thoda delay se start karo
-video2.pause();
-
-function handleVideoLoop() {
-  // Jab video khatam hone wala ho (1.5 sec pehle)
-  if (activeVideo.duration - activeVideo.currentTime <= 1.5) {
-    // Next video start karo aur fade in karo
-    nextVideo.currentTime = 0;
-    nextVideo.play().catch((err) => console.log("Video play error:", err));
-    nextVideo.style.opacity = "1";
-    activeVideo.style.opacity = "0";
-
-    // Swap karo
-    let temp = activeVideo;
-    activeVideo = nextVideo;
-    nextVideo = temp;
-  }
-  requestAnimationFrame(handleVideoLoop);
-}
-
-// Page load par turant video play karo
-function startVideoPlay() {
-  if (!isLooping) {
-    isLooping = true;
-    video1.currentTime = 0;
-    video1.play().catch((err) => console.log("Video play error:", err));
-    handleVideoLoop();
-  }
-}
-
-// Start playing when video has enough data to play smoothly
-video1.addEventListener("canplaythrough", startVideoPlay, { once: true });
-
-// Fallback: if canplaythrough takes too long, start on canplay
-video1.addEventListener(
-  "canplay",
-  () => {
-    if (!isLooping) {
-      startVideoPlay();
-    }
-  },
-  { once: true },
-);
-
-// Backup: start after a short delay if events don't fire
-setTimeout(() => {
-  if (!isLooping) {
-    startVideoPlay();
-  }
-}, 2000);
-
 // -- CART & ORDERING SYSTEM --
 let cart = [];
 const cartBtn = document.getElementById("cart-btn");
