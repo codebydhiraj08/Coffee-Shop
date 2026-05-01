@@ -387,9 +387,10 @@
       }
 
       // ── LIVE ORDERS (API POLLING) ──
+      const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:8080' : '';
       async function loadOrders() {
         try {
-          const res = await fetch("/api/orders");
+          const res = await fetch(API_BASE + "/api/orders");
           const json = await res.json();
           const orders = json.data || [];
           const tbody = document.getElementById("orders-body");
@@ -432,7 +433,7 @@
 
       async function updateOrderStatus(id, newStatus) {
         try {
-          await fetch(`/api/orders/${id}/status`, {
+          await fetch(API_BASE + `/api/orders/${id}/status`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: newStatus })

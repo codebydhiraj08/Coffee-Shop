@@ -190,7 +190,7 @@ function updateCart() {
     div.className = "cart-item";
     div.innerHTML = `
       <div class="cart-item-name">${item.name}</div>
-      <div class="cart-item-price">?${item.price} <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer; margin-left: 10px;">&times;</button></div>
+      <div class="cart-item-price">₹${item.price} <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer; margin-left: 10px;">&times;</button></div>
     `;
     cartItemsContainer.appendChild(div);
   });
@@ -213,7 +213,7 @@ document.querySelectorAll(".btn-add").forEach((btn) => {
     if (!card) return;
     
     const name = card.querySelector(".menu-card-name").textContent.trim();
-    let priceText = card.querySelector(".menu-card-price").textContent.replace("?", "").trim();
+    let priceText = card.querySelector(".menu-card-price").textContent.replace("₹", "").replace("?", "").trim();
     const price = parseInt(priceText, 10);
     
     cart.push({ name, price });
@@ -221,7 +221,7 @@ document.querySelectorAll(".btn-add").forEach((btn) => {
     
     // Animation
     const orig = this.textContent;
-    this.textContent = "?";
+    this.textContent = "✓";
     this.style.background = "#4CAF50";
     setTimeout(() => {
       this.textContent = "+";
@@ -244,7 +244,8 @@ orderForm.addEventListener("submit", async function(e) {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   
   try {
-    const response = await fetch("/api/orders", {
+    const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:8080' : '';
+    const response = await fetch(API_BASE + "/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
