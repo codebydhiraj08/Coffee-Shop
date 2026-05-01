@@ -250,14 +250,14 @@ orderForm.addEventListener("submit", async function(e) {
     
     // Success
     btnPlaceOrder.style.background = "#4CAF50";
-    btnPlaceOrder.textContent = "? Order Placed!";
+    btnPlaceOrder.textContent = "\u2713 Order Placed!";
     
     setTimeout(() => {
       cart = [];
       updateCart();
       cartModal.classList.remove("active");
       btnPlaceOrder.style.background = "";
-      btnPlaceOrder.textContent = "Place Order ?";
+      btnPlaceOrder.textContent = "Place Order \u2192";
       btnPlaceOrder.disabled = false;
       document.getElementById("order-name").value = "";
       document.getElementById("order-table").value = "";
@@ -266,7 +266,7 @@ orderForm.addEventListener("submit", async function(e) {
   } catch (err) {
     console.error(err);
     alert("Error placing order. Please try again.");
-    btnPlaceOrder.textContent = "Place Order ?";
+    btnPlaceOrder.textContent = "Place Order \u2192";
     btnPlaceOrder.disabled = false;
   }
 });
