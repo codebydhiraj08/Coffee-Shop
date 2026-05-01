@@ -66,18 +66,7 @@ window.addEventListener("load", () => {
   showAllMenuItems();
 });
 
-// Add to cart button animation
-document.querySelectorAll(".btn-add").forEach((btn) => {
-  btn.addEventListener("click", function () {
-    const orig = this.textContent;
-    this.textContent = "✓";
-    this.style.background = "#4CAF50";
-    setTimeout(() => {
-      this.textContent = orig;
-      this.style.background = "";
-    }, 1200);
-  });
-});
+// Add to cart button logic is handled below
 
 // Reserve form submit - Save locally with localStorage
 document.getElementById("res-form").addEventListener("submit", function (e) {
@@ -221,7 +210,7 @@ document.querySelectorAll(".btn-add").forEach((btn) => {
     
     // Animation
     const orig = this.textContent;
-    this.textContent = "✓";
+    this.textContent = "\u2713";
     this.style.background = "#4CAF50";
     setTimeout(() => {
       this.textContent = "+";

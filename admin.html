@@ -407,7 +407,7 @@
             let itemsText = "";
             try {
               const itemsArr = JSON.parse(row.items);
-              itemsText = itemsArr.map(i => `${i.name} (₹${i.price})`).join("<br>");
+              itemsText = itemsArr.map(i => i.name).join("<br>");
             } catch(e) { itemsText = row.items; }
 
             const time = new Date(row.created_at).toLocaleTimeString();
