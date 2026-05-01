@@ -244,7 +244,8 @@ orderForm.addEventListener("submit", async function(e) {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   
   try {
-    const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:8080' : '';
+    const isLocalDevelopment = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') && window.location.port !== '8080';
+    const API_BASE = (window.location.protocol === 'file:' || isLocalDevelopment) ? 'http://localhost:8080' : '';
     const response = await fetch(API_BASE + "/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

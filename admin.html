@@ -387,7 +387,8 @@
       }
 
       // ── LIVE ORDERS (API POLLING) ──
-      const API_BASE = window.location.protocol === 'file:' ? 'http://localhost:8080' : '';
+      const isLocalDevelopment = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') && window.location.port !== '8080';
+      const API_BASE = (window.location.protocol === 'file:' || isLocalDevelopment) ? 'http://localhost:8080' : '';
       async function loadOrders() {
         try {
           const res = await fetch(API_BASE + "/api/orders");
